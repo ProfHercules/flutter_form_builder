@@ -165,6 +165,8 @@ class FormBuilderSearchableDropdown<T> extends FormBuilderField<T> {
             return InputDecorator(
               decoration: state.decoration(),
               child: dropdown_search.DropdownSearch<T>(
+                //Hack to rebuild when didChange is called
+                key: ValueKey(state.value),
                 items: items,
                 maxHeight: 300,
                 onFind: onFind,
@@ -184,8 +186,9 @@ class FormBuilderSearchableDropdown<T> extends FormBuilderField<T> {
                 dropdownBuilderSupportsNullItem:
                     dropdownBuilderSupportsNullItem,
                 dropDownButton: dropDownButton,
-                dropdownSearchDecoration:
-                    InputDecoration.collapsed(hintText: hint),
+                dropdownSearchDecoration: InputDecoration.collapsed(
+                  hintText: hint,
+                ),
                 emptyBuilder: emptyBuilder,
                 errorBuilder: errorBuilder,
                 filterFn: filterFn,

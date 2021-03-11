@@ -196,8 +196,7 @@ class CompleteFormState extends State<CompleteForm> {
                   ),
                   FormBuilderRangeSlider(
                     name: 'range_slider',
-                    validator: FormBuilderValidators.compose(
-                        [FormBuilderValidators.min(context, 6)]),
+                    // validator: FormBuilderValidators.compose([FormBuilderValidators.min(context, 6)]),
                     onChanged: _onChanged,
                     min: 0.0,
                     max: 100.0,
@@ -233,14 +232,12 @@ class CompleteFormState extends State<CompleteForm> {
                         ],
                       ),
                     ),
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.equal(
-                        context,
-                        true,
-                        errorText:
-                            'You must accept terms and conditions to continue',
-                      ),
-                    ]),
+                    validator: FormBuilderValidators.equal(
+                      context,
+                      true,
+                      errorText:
+                          'You must accept terms and conditions to continue',
+                    ),
                   ),
                   FormBuilderTextField(
                     autovalidateMode: AutovalidateMode.always,
@@ -411,35 +408,6 @@ class CompleteFormState extends State<CompleteForm> {
                     border: Border.all(color: Colors.green),
                     onChanged: _onChanged,
                   ),
-                  FormBuilderImagePicker(
-                    name: 'photos',
-                    decoration: const InputDecoration(labelText: 'Pick Photos'),
-                    maxImages: 1,
-                  ),
-                  const SizedBox(height: 15),
-                  FormBuilderPhoneField(
-                    name: 'phone_number',
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Phone Number',
-                      hintText: 'Hint',
-                    ),
-                    onChanged: _onChanged,
-                    priorityListByIsoCode: ['KE'],
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.numeric(context,
-                          errorText: 'Invalid phone number'),
-                      FormBuilderValidators.required(context,
-                          errorText: 'This field required'),
-                    ]),
-                  ),
-                  const SizedBox(height: 15),
-                  FormBuilderFilePicker(
-                    name: 'files',
-                    previewImages: false,
-                    decoration: InputDecoration(labelText: 'Files filed'),
-                  ),
-                  const SizedBox(height: 15),
                 ],
               ),
             ),
@@ -465,10 +433,11 @@ class CompleteFormState extends State<CompleteForm> {
                 const SizedBox(width: 20),
                 Expanded(
                   child: OutlineButton(
-                    focusNode: FocusNode(),
                     color: Theme.of(context).accentColor,
-                    child: const Text('Reset',
-                        style: TextStyle(color: Colors.white)),
+                    child: Text(
+                      'Reset',
+                      style: TextStyle(color: Theme.of(context).accentColor),
+                    ),
                     onPressed: () {
                       _formKey.currentState.reset();
                     },

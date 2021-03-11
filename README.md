@@ -19,6 +19,10 @@ and collect final user input.
 To use this plugin, add `flutter_form_builder` as a
 [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
+## New Video Tutorial
+[![Youtube Video Tutorial](https://i.imgur.com/gBJu2Tql.png)](https://www.youtube.com/watch?v=eGwq3_0K_Sg)<br/>
+[Check out the video tutorial from SyntacOps on Youtube](https://www.youtube.com/watch?v=eGwq3_0K_Sg)
+
 ### Migrating from v3 to v4
 Improvements:
 * Internationalized default error texts for inbuilt validators - Help wanted to do even more in translating to more languages.
@@ -196,21 +200,16 @@ Widget build(BuildContext context) {
                     TextSpan(
                       text: 'Terms and Conditions',
                       style: TextStyle(color: Colors.blue),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          print('launch url');
-                        },
                     ),
                   ],
                 ),
               ),
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.requireTrue(
-                  context,
-                  errorText:
-                      'You must accept terms and conditions to continue',
-                ),
-              ]),
+              validator: FormBuilderValidators.equal(
+                context,
+                true,
+                errorText:
+                    'You must accept terms and conditions to continue',
+              ),
             ),
             FormBuilderTextField(
               name: 'age',
@@ -375,10 +374,7 @@ The currently supported fields include:
 * `FormBuilderDateRangePicker` - For selection of a range of dates
 * `FormBuilderDateTimePicker` - For `Date`, `Time` and `DateTime` input
 * `FormBuilderDropdown` - Used to select one value from a list as a Dropdown
-* `FormBuilderFilePicker` - Picks image(s) from user device storage.
 * `FormBuilderFilterChip` - Creates a chip that acts like a checkbox.
-* `FormBuilderImagePicker` - Picks image(s) from Gallery or Camera.
-* `FormBuilderPhoneField` - International phone number input.
 * `FormBuilderRadioGroup` - Used to select one value from a list of Radio Widgets 
 * `FormBuilderRangeSlider` - Used to select a range from a range of values
 * `FormBuilderRating` - For selection of a numerical value as a rating
@@ -403,6 +399,13 @@ In order to create an input field in the form, along with the label, and any app
 | `onChanged` | `ValueChanged<T>` | `null` | `No` | This event function will fire immediately the the field value changes |
 | `valueTransformer` | `ValueTransformer<T>` | `null` | `No` | Function that transforms field value before saving to form value. e.g. transform TextField value for numeric field from `String` to `num` |
 The rest of the attributes will be determined by the type of Widget being used.
+
+### Additional input fields
+To make this package compartible with as many platforms as Flutter supports, we separated some input fields into their own packages because they depend on platform-specific plugins. Here's are the links to some of the packages that could be used with `FormBuilder`
+* [FormBuilderFilePicker](https://pub.dev/packages/form_builder_file_picker) - Picks image(s) from user device storage.
+* [FormBuilderImagePicker](https://pub.dev/packages/form_builder_image_picker) - Picks image(s) from Gallery or Camera.
+* [FormBuilderLocationField](https://pub.dev/packages/form_builder_map_field) - Geographic location input.
+* [FormBuilderPhoneField](https://pub.dev/packages/form_builder_phone_field) - International phone number input.
 
 ### Building your own custom field
 To build your own field within a `FormBuilder`, we use `FormBuilderField` which will require that you define your own field.
